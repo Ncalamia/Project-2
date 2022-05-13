@@ -13,13 +13,13 @@ module.exports = [
 	},
 	{
 		toDo:"Yard work",
-		subToDo:["Plant flowers",
+		subToDo:["Plant flowers","Rake leaves"],
 		priority:false,
 		finished:false,
 	},
 	{
 		toDo:"Take out Trash",
-		subToDo:,
+		subToDo:null,
 		priority:false,
 		finished:false,
 	},

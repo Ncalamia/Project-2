@@ -11,9 +11,10 @@
 		</nav>
 		<div class='show-page-conaitner'>
 			<h1><%=ToDo.toDo%></h1>
+
 			<% for (let i = 0 ; i < ToDo.subToDo.length; i++) { %>
-				<div class='show-sub-todo'>
-					<h1><%=ToDo.subToDo[i]%></h1>
+				<div class='show-sub-todo-container'>
+					<h4 class='show-sub-todo'><%=ToDo.subToDo[i]%></h4>
 				</div>
 		<% } %>
 		</div>

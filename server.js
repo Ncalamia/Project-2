@@ -65,7 +65,7 @@ app.get('/to-do/seed', (req,res) => {
 
 // Adding Seed Data for affiramtions
 app.get('/to-do/seed2', (req,res) => {
-	ToDoSchema.create(seedDataAffirmations, (err, createSeedDataAffirmations) => {
+	AffirmationSchema.create(seedDataAffirmations, (err, createSeedDataAffirmations) => {
 			res.redirect('/to-do')
 		}
 	)
