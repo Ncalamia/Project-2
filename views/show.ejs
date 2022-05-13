@@ -5,6 +5,17 @@
 		<title></title>
 	</head>
 	<body>
-		<h1>show.ejs</h1>
+		<nav>
+			<a href="/to-do">Home</a>
+			<a href="/to-do/new">Add a new To Do</a>
+		</nav>
+		<div class='show-page-conaitner'>
+			<h1><%=ToDo.toDo%></h1>
+			<% for (let i = 0 ; i < ToDo.subToDo.length; i++) { %>
+				<div class='show-sub-todo'>
+					<h1><%=ToDo.subToDo[i]%></h1>
+				</div>
+		<% } %>
+		</div>
 	</body>
 </html>

@@ -121,7 +121,14 @@ app.get('/to-do/:id/edit', (req, res) => {
 
 // show page
 app.get('/to-do/:id', (req, res) => {
-		res.render('show.ejs')
+	ToDoSchema.findById(req.params.id, (err, foundToDo) => {
+			res.render(
+				'show.ejs',
+				{
+					ToDo: foundToDo
+				}
+			)
+		})
 })
 
 
