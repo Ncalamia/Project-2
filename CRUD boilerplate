@@ -4,11 +4,6 @@
 const express = require('express');
 const methodOverride  = require('method-override');
 const mongoose = require ('mongoose');
-const ToDoSchema = require('./models/to-do-schema.js')
-const AffirmationSchema = require('./models/affirmations-schema.js')
-const seedDataToDos = require('./models/to-do-data.js')
-const seedDataAffirmations = require('./models/affirmations-data.js')
-
 const app = express ();
 const db = mongoose.connection;
 require('dotenv').config()
@@ -16,7 +11,7 @@ require('dotenv').config()
 //Port
 //___________________
 // Allow use of Heroku's port or your own local port, depending on the environment
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3003;
 
 //___________________
 //Database
@@ -27,9 +22,8 @@ const MONGODB_URI = process.env.MONGODB_URI;
 // Connect to Mongo &
 // Fix Depreciation Warnings from Mongoose
 // May or may not need these depending on your Mongoose version
-mongoose.connect(MONGODB_URI , () => {
-	console.log('connected to mongo')
-})
+mongoose.connect(MONGODB_URI , { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }
+);
 
 // Error / success
 db.on('error', (err) => console.log(err.message + ' is Mongod not running?'));
@@ -53,70 +47,6 @@ app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 
 //___________________
 // Routes
-
-
-// Adding Seed Data
-app.get('/to-do/seed', (req,res) => {
-	ToDoSchema.create(seedDataToDos, (err, createSeedDataToDos) => {
-			res.redirect('/to-do')
-		}
-	)
-})
-
-
-// New page
-app.get('/to-do/new', (req, res) => {
-	res.render('new.ejs');
-});
-
-// Home page
-app.get('/to-do', (req, res) => {
-	ToDoSchema.find({}, (err, allToDos) => {
-		res.render(
-			'index.ejs',
-			{
-				toDos:allToDos
-			}
-		)
-	})
-})
-
-// Edit page
-app.get('/to-do/:id/edit', (req, res) => {
-		res.render('edit.ejs')
-})
-
-// // Update
-// app.put('/pokedex/:id', (req, res) => {
-// 	PokeSchema.findByIdAndUpdate(req.params.id, req.body, {
-// 		new: true}, (err, updatedModel) => {
-// 		res.redirect('/pokedex')
-// 	})
-// })
-
-
-// // Delete
-// app.delete('/pokedex/:id', (req, res) => {
-// 	PokeSchema.findByIdAndRemove(req.params.id, (err, data) => {
-// 		res.redirect('/pokedex')
-// 	})
-// })
-
-// show page
-app.get('/to-do/:id', (req, res) => {
-		res.render('show.ejs')
-})
-
-
-// // Path to add pokemon
-// app.post('/pokedex', (req, res) => {
-//   PokeSchema.create(req.body, (error, createdPokemon) => {
-//       res.redirect('/pokedex')
-//     })
-// })
-
-
-
 //___________________
 //localhost:3000
 app.get('/' , (req, res) => {

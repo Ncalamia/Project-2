@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div class='home-container'>
+			<% for (let i = 0; i < toDos.length; i++) { %>
+				<div class='home-to-do-container'>
+					<a href="/to-do/<%=toDos[i].id; %>"><%=toDos[i].toDo%></a>
+					<a href="/to-do/<%=toDos[i].id;%>/edit">Edit</a>
+            <h4 class="priority">Top Priority?</h4>
+						<input type="checkbox" name="topPriority"/><br/>
+				</div>
+
+		<% } %>
+		</div>
+	</body>
+</html>
