@@ -16,8 +16,13 @@
 				<div class='home-to-do-container'>
 					<a href="/to-do/<%=toDos[i].id; %>"><%=toDos[i].toDo%></a>
 					<a href="/to-do/<%=toDos[i].id;%>/edit">Edit</a>
-            <h4 class="priority">Top Priority?</h4>
-						<input type="checkbox" name="topPriority"/><br/>
+					<h4 class="priority">Top Priority?</h4>
+						<% if (toDos[i].priority === false) { %>
+							<input type="checkbox" name="topPriorityNo"/><br/>
+						<% }
+							if (toDos[i].priority === true) { %>
+							<input type="checkbox" name="topPriorityYes" checked/><br/>
+						<% } %>
 				</div>
 		<% } %>
 			</div>

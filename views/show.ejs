@@ -8,15 +8,27 @@
 		<nav>
 			<a href="/to-do">Home</a>
 			<a href="/to-do/new">Add a new To Do</a>
+			<a href="/to-do/<%=toDo.id;%>/edit">Edit</a>
 		</nav>
-		<div class='show-page-conaitner'>
-			<h1><%=ToDo.toDo%></h1>
 
-			<% for (let i = 0 ; i < ToDo.subToDo.length; i++) { %>
-				<div class='show-sub-todo-container'>
-					<h4 class='show-sub-todo'><%=ToDo.subToDo[i]%></h4>
-				</div>
-		<% } %>
+		<div class='show-page-container'>
+			<h1><%=toDo.toDo%></h1>
+			<div class='priority-container'>
+				<h4 class='priority'>Top Priority?</h4>
+				<% if (toDo.priority === false) { %>
+					<input type="checkbox" name="topPriorityNo"/><br/>
+				<% }
+					if (toDo.priority === true) { %>
+					<input type="checkbox" name="topPriorityYes" checked/><br/
+			</div>
+			<% } %>
+			<% if (toDo.subToDo !== null) {
+			 		for (let i = 0 ; i < toDo.subToDo.length; i++) { %>
+					<div class='show-sub-todo-container'>
+						<h4 class='show-sub-todo'><%=toDo.subToDo[i]%></h4>
+					</div>
+				<% }
+				} %>
 		</div>
 	</body>
 </html>

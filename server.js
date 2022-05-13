@@ -79,6 +79,11 @@ app.get('/to-do/new', (req, res) => {
 
 // Home page
 app.get('/to-do', (req, res) => {
+	if(req.body.priority === 'on'){
+			req.body.priority = true;
+	} else {
+			req.body.priority = false;
+	}
 	ToDoSchema.find({}, (err, allToDos) => {
 		res.render(
 			'index.ejs',
@@ -121,11 +126,11 @@ app.get('/to-do/:id/edit', (req, res) => {
 
 // show page
 app.get('/to-do/:id', (req, res) => {
-	ToDoSchema.findById(req.params.id, (err, foundToDo) => {
+ToDoSchema.findById(req.params.id, (err, foundToDo) => {
 			res.render(
 				'show.ejs',
 				{
-					ToDo: foundToDo
+					toDo: foundToDo
 				}
 			)
 		})

@@ -1,8 +1,8 @@
 module.exports = [
 	{
-		toDo:"Laudry",
+		toDo:"Laundry",
 		subToDo:["Put wash in the washing machine","Put wash in the dryer", "Fold laundry","Put laundry away"],
-		priority:false,
+		priority:true,
 		finished:false,
 	},
 	{
@@ -14,7 +14,7 @@ module.exports = [
 	{
 		toDo:"Yard work",
 		subToDo:["Plant flowers","Rake leaves"],
-		priority:false,
+		priority:true,
 		finished:false,
 	},
 	{
