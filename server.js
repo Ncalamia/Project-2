@@ -55,9 +55,17 @@ app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 // Routes
 
 
-// Adding Seed Data
+// Adding Seed Data for to-dos
 app.get('/to-do/seed', (req,res) => {
 	ToDoSchema.create(seedDataToDos, (err, createSeedDataToDos) => {
+			res.redirect('/to-do')
+		}
+	)
+})
+
+// Adding Seed Data for affiramtions
+app.get('/to-do/seed2', (req,res) => {
+	ToDoSchema.create(seedDataAffirmations, (err, createSeedDataAffirmations) => {
 			res.redirect('/to-do')
 		}
 	)
@@ -79,6 +87,15 @@ app.get('/to-do', (req, res) => {
 			}
 		)
 	})
+	// AffirmationSchema.find({}, (err, oneAffirmation) => {
+	// 	res.body
+	// 	res.render(
+	// 		'index.ejs',
+	// 		{
+	// 			affirmation: oneAffirmation
+	// 		}
+	// 	)
+	// })
 })
 
 // Edit page

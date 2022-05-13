@@ -5,7 +5,13 @@
 		<title></title>
 	</head>
 	<body>
+		<nav>
+			<a href="/to-do/new">Add a new To Do</a>
+		</nav>
+			<a href="#">Tips</a>
+
 		<div class='home-container'>
+			<div class='to-do-container'>
 			<% for (let i = 0; i < toDos.length; i++) { %>
 				<div class='home-to-do-container'>
 					<a href="/to-do/<%=toDos[i].id; %>"><%=toDos[i].toDo%></a>
@@ -13,8 +19,11 @@
             <h4 class="priority">Top Priority?</h4>
 						<input type="checkbox" name="topPriority"/><br/>
 				</div>
-
 		<% } %>
+			</div>
+		<div class='affirmation-container'>
+
+		</div>
 		</div>
 	</body>
 </html>
