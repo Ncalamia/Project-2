@@ -5,6 +5,21 @@
 		<title></title>
 	</head>
 	<body>
-		<h1>edit.ejs</h1>
+		<div class='edit-container'>
+			<form action="/to-do/<%=toDo._id%>?_method=PUT" method="POST">
+				To Do: <input type="text" name="to-do" value="<%=toDo.toDo%>"/><br/>
+				<% if (toDo.subToDo !== null) {
+					 	for (let i = 0; i < toDo.subToDo.length; i++) { %>
+							Sub-To-Do: <input type="text" name="subToDo" value="<%=toDo.subToDo[i]%>"/><br/>
+					<% }
+				} %>
+				Priority: <input type="text" name="priority" value="<%=toDo.priority%>"/><br/>
+				<input type="submit" value="Edit To Do"/>
+
+				<!-- //Was working on adding a box so the user can add an additional sub-to-do if they need another or there isn't one to begin with -->
+
+				<button>Add sub-to-do</button>
+			</form>
+		</div>
 	</body>
 </html>

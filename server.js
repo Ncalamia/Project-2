@@ -77,44 +77,50 @@ app.get('/to-do/new', (req, res) => {
 	res.render('new.ejs');
 });
 
+
+
 // Home page
 app.get('/to-do', (req, res) => {
-	if(req.body.priority === 'on'){
-			req.body.priority = true;
-	} else {
-			req.body.priority = false;
-	}
+	// if(req.body.priority === 'on'){
+	// 		req.body.priority = true;
+	// } else {
+	// 		req.body.priority = false;
+	// }
 	ToDoSchema.find({}, (err, allToDos) => {
-		res.render(
-			'index.ejs',
-			{
-				toDos:allToDos
-			}
-		)
+	AffirmationSchema.find({}, (err, oneAffirmation) => {
+		console.log(err);
+			res.render(
+				'index.ejs',
+					{
+						toDos: allToDos,
+						affirmation: oneAffirmation
+					}
+				)
+		})
 	})
-	// AffirmationSchema.find({}, (err, oneAffirmation) => {
-	// 	res.body
-	// 	res.render(
-	// 		'index.ejs',
-	// 		{
-	// 			affirmation: oneAffirmation
-	// 		}
-	// 	)
-	// })
 })
+
+
 
 // Edit page
 app.get('/to-do/:id/edit', (req, res) => {
-		res.render('edit.ejs')
+		ToDoSchema.findById(req.params.id, (err,foundToDo) => {
+			res.render(
+				'edit.ejs',
+			{
+				toDo:foundToDo
+			}
+		)
+	})
 })
 
-// // Update
-// app.put('/pokedex/:id', (req, res) => {
-// 	PokeSchema.findByIdAndUpdate(req.params.id, req.body, {
-// 		new: true}, (err, updatedModel) => {
-// 		res.redirect('/pokedex')
-// 	})
-// })
+// Update
+app.put('/to-do/:id', (req, res) => {
+	ToDoSchema.findByIdAndUpdate(req.params.id, req.body, {
+		new: true}, (err, updatedToDo) => {
+		res.redirect('/to-do')
+	})
+})
 
 
 // // Delete

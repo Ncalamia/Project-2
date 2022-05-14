@@ -12,19 +12,22 @@
 
 		<div class='home-container'>
 			<div class='to-do-container'>
-			<% for (let i = 0; i < toDos.length; i++) { %>
-				<div class='home-to-do-container'>
-					<a href="/to-do/<%=toDos[i].id; %>"><%=toDos[i].toDo%></a>
-					<a href="/to-do/<%=toDos[i].id;%>/edit">Edit</a>
-					<h4 class="priority">Top Priority?</h4>
-						<% if (toDos[i].priority === false) { %>
-							<input type="checkbox" name="topPriorityNo"/><br/>
-						<% }
-							if (toDos[i].priority === true) { %>
-							<input type="checkbox" name="topPriorityYes" checked/><br/>
-						<% } %>
+				<% for (let i = 0; i < toDos.length; i++) { %>
+					<div class='home-to-do-container'>
+						<a href="/to-do/<%=toDos[i].id; %>"><%=toDos[i].toDo%></a>
+						<a href="/to-do/<%=toDos[i].id;%>/edit">Edit</a>
+						<h4 class="priority">Top Priority?</h4>
+							<% if (toDos[i].priority === false) { %>
+								<input type="checkbox" name="topPriorityNo"/><br/>
+							<% }
+								if (toDos[i].priority === true) { %>
+								<input type="checkbox" name="topPriorityYes" checked/><br/>
+								<% }
+						 } %>
 				</div>
-		<% } %>
+			</div>
+			<div class='affirmation-container'>
+					<h1><%=affirmation[Math.floor(Math.random() * affirmation.length)].message%></h1>
 			</div>
 		</div>
 	</body>
