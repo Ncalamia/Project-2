@@ -5,6 +5,17 @@
 		<title></title>
 	</head>
 	<body>
-		<h1>new.ejs</h1>
+		<nav>
+			<a href="/to-do">Home</a>
+		</nav>
+		<form action="/to-do" method="POST">
+						To-do: <input type="text" name="toDo" placeholder="Write to-do here"/><br/>
+            Sub-to-do: <input type="text" name="subToDo" placeholder="Write sub-to-do here"/><br/>
+						Add Sub-to-do: <input type="submit" name="add" value="+" /><br/>
+						Priority: <input type="checkbox" name="priority" placeholder="write here"/><br/>
+					<div class='submit-new-to-do'>
+            <input type="submit" value="Create To Do" />
+					</div>
+    </form>
 	</body>
 </html>

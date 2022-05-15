@@ -81,14 +81,13 @@ app.get('/to-do/new', (req, res) => {
 
 // Home page
 app.get('/to-do', (req, res) => {
-	// if(req.body.priority === 'on'){
-	// 		req.body.priority = true;
-	// } else {
-	// 		req.body.priority = false;
-	// }
+	if(req.body.priority === 'on'){
+			req.body.priority = true;
+	} else {
+			req.body.priority = false;
+	}
 	ToDoSchema.find({}, (err, allToDos) => {
 	AffirmationSchema.find({}, (err, oneAffirmation) => {
-		console.log(err);
 			res.render(
 				'index.ejs',
 					{
@@ -116,8 +115,14 @@ app.get('/to-do/:id/edit', (req, res) => {
 
 // Update
 app.put('/to-do/:id', (req, res) => {
+	if(req.body.priority === 'on'){
+			req.body.priority = true;
+	} else {
+			req.body.priority = false;
+	}
 	ToDoSchema.findByIdAndUpdate(req.params.id, req.body, {
 		new: true}, (err, updatedToDo) => {
+			// res.send(updatedToDo)
 		res.redirect('/to-do')
 	})
 })
@@ -132,6 +137,11 @@ app.put('/to-do/:id', (req, res) => {
 
 // show page
 app.get('/to-do/:id', (req, res) => {
+	if(req.body.priority === 'on'){
+			req.body.priority = true;
+	} else {
+			req.body.priority = false;
+	}
 ToDoSchema.findById(req.params.id, (err, foundToDo) => {
 			res.render(
 				'show.ejs',
@@ -143,12 +153,20 @@ ToDoSchema.findById(req.params.id, (err, foundToDo) => {
 })
 
 
-// // Path to add pokemon
-// app.post('/pokedex', (req, res) => {
-//   PokeSchema.create(req.body, (error, createdPokemon) => {
-//       res.redirect('/pokedex')
-//     })
-// })
+// Adding new to do
+app.post('/to-do', (req, res) => {
+	if(req.body.priority === 'on'){
+			req.body.priority = true;
+	} else {
+			req.body.priority = false;
+	}
+  ToDoSchema.create(req.body, (error, createdToDo) => {
+		console.log(req.body);
+		console.log(createdToDo);
+      res.redirect('/to-do')
+    })
+})
+
 
 
 
