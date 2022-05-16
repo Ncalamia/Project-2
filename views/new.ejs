@@ -4,28 +4,55 @@
 	<body>
 		<script>
 		 const addSubToDo = () => {
-					 console.log("hi")
+					 // Referencing id subToDo properly place new input field
+					 const addButton = document.getElementById("addButton");
+					 // Creating new input field
+					 const inputNew = document.createElement("input");
+					 inputNew.id = "subToDo"
+					 inputNew.type = "text"
+					 inputNew.name = "subToDo"
+					 inputNew.placeholder = "Write Sub To Do Here"
+					 document.body.append(inputNew);
+					 // Inserting new input field in correct spot
+					 addButton.before(inputNew)
+					 const createBreak = document.createElement("br")
+					 inputNew.after(createBreak)
 					}
+		const deleteSubToDo = () => {
+		 			const subToDos = document.getElementById("subToDo");
+					subToDos.remove()
+		 			}
 		</script>
 		<nav>
 			<a href="/to-do">Home</a>
 		</nav>
+		<div id="formContainer">
 		<form action="/to-do" method="POST">
-						To-do: <input type="text" name="toDo" placeholder="Write to-do here"/><br/>
-            Sub-to-do: <input type="text" name="subToDo" placeholder="Write sub-to-do here"/><br/>
-						Add Sub-to-do: <input id="addButton" type="button" name="add" value="+" /><br/>
-
+						To Do: <input type="text" name="toDo" placeholder="Write To Do Here"/><br/>
+						<br/>
+            Sub To Do: <input id="subToDo" type="text" name="subToDo" placeholder="Write Sub To Do Here"/><br/>
+						<a id="addButton" class="btn btn-primary"
+				    href="javascript:"
+				    onclick="addSubToDo()"
+				    role="button"
+				    >Add New Sub To Do</a>
+						<br/>
+						<a class="btn btn-primary"
+						href="javascript:"
+						onclick="deleteSubToDo()"
+						role="button"
+						>Delete Sub To Do</a>
+						<br/>
+						<br/>
 						Priority: <input type="checkbox" name="priority" placeholder="write here"/><br/>
+						<br/>
 					<div class='submit-new-to-do'>
             <input class="btn btn-outline-success"type="submit" value="Create To Do"/>
 					</div>
     </form>
+	</div>
 
-    <a class="btn btn-primary"
-    href="javascript:"
-    onclick="addSubToDo()"
-    role="button"
-    >Add</a>
+
 
 		<%- include ('./partials/footer.ejs') %>
 

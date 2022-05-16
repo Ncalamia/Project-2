@@ -5,14 +5,57 @@
 		<nav>
 			<a href="/to-do">Home</a>
 		</nav>
+		<script>
+		 const addSubToDo = () => {
+					 // Referencing id subToDo properly place new input field
+					 const addButton = document.getElementById("addButton");
+					 // Creating new input field
+					 const inputNew = document.createElement("input");
+					 inputNew.id = "subToDoNew"
+					 inputNew.type = "text"
+					 inputNew.name = "subToDo"
+					 inputNew.placeholder = "Write Sub To Do Here"
+					 document.body.append(inputNew);
+					 // Inserting new input field in correct spot
+					 addButton.before(inputNew)
+					 const createBreak = document.createElement("br")
+					 inputNew.after(createBreak)
+					}
+		const deleteSubToDo = () => {
+					const subToDoCurrent = document.getElementById("subToDoCurrent");
+					subToDoCurrent.remove()
+					}
+		const deleteNewSubToDo = () => {
+					const subToDoNew = document.getElementById("subToDoNew");
+					subToDoNew.remove()
+					}
+		</script>
 		<div class='edit-container'>
 			<form action="/to-do/<%=toDo._id%>?_method=PUT" method="POST">
 				To Do: <input type="text" name="toDo" value="<%=toDo.toDo%>"/><br/>
 				<% if (toDo.subToDo !== null) {
 					 	for (let i = 0; i < toDo.subToDo.length; i++) { %>
-							Sub-To-Do: <input type="text" name="subToDo" value="<%=toDo.subToDo[i]%>"/><br/>
-					<% }
-					}  %>
+							<div class="subToDoContainer">
+							Sub-To-Do: <input id="subToDoCurrent" type="text" name="subToDo" value="<%=toDo.subToDo[i]%>"/>
+							<a class="btn btn-primary"
+							href="javascript:"
+							onclick="deleteSubToDo()"
+							role="button"
+							>Delete Sub To Do</a>
+							</div>
+					<% } %>
+					<a id="addButton" class="btn btn-primary"
+					href="javascript:"
+					onclick="addSubToDo()"
+					role="button"
+					>Add New Sub To Do</a>
+					<br/>
+					<a class="btn btn-primary"
+					href="javascript:"
+					onclick="deleteNewSubToDo()"
+					role="button"
+					>Delete New Sub To Do</a>
+				<%	}  %>
 					Top Priority?:
 					<% if (toDo.priority === false) { %>
 						<input type="checkbox" name="priority"/><br/>
@@ -21,20 +64,7 @@
 					 <% } %>
 				<input type="submit" value="Submit Changes"/>
 				 </form>
-
-
-				 			<% const addSubToDo = () => {
-				 					 console.log('HI')
-				 					 %> <input type="text" name="subToDo" placeholder="Add Sub To Do Here"/><br/>
-				 				 <% } %>
-
-				 				<button href="javascript" onclick="addSubToDo()">Add New Sub To Do</button><br/>
-
-
-
 			</div>
-
-
 	</body>
 			<%- include ('./partials/footer.ejs') %>
 </html>

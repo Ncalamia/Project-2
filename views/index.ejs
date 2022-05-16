@@ -2,23 +2,57 @@
 <html lang="en" dir="ltr">
 <%- include ('./partials/head.ejs') %>
 
-<body>
+
+<body tabindex="1">
 	<div class='container-fluid'>
 		<div class='row'>
-			<div class='header col-12'>
+			<div class='header'>
 				<nav>
-					<a href="/to-do/new">Add a new To Do</a>
-					<a href="#">Tips</a>
-					<a href="#">About</a>
-				</nav>
-			</div>
+					<button class="btn btn-primary" onclick="window.location.href='/to-do/new'">Add New Item To Accomplish</button>
+
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myTipsModal">Tips</button>
+
+					<div class="modal" tabindex="-1" id="myTipsModal">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title">Tips</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<h8>Some Tips</h8>
+								</div>
+							</div>
+						</div>
+					</div>
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myAboutModal">About</button>
+
+					<div class="modal" tabindex="-1" id="myAboutModal">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title">About</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<h8>Something about</h8>
+								</div>
+							</div>
+						</div>
+					</div>
+
+			</nav>
 		</div>
-		<div class='row'>
-			<div class='header col-12'>
-				<h1 class="title">Accomplished.</h1>
-			</div>
+	</div>
+
+
+
+	<div class='row'>
+		<div class='header col-12'>
+			<h1 class="title">Accomplished.</h1>
 		</div>
-		<div class='row'>
+	</div>
+	<div class='row'>
 		<div class='content col-6'>
 			<div class="accordion" id="accordionSection">
 				<% for (let i = 0; i < toDos.length; i++) { %>
@@ -50,6 +84,12 @@
 							</div>
 							<% }
 					} %>
+						</div>
+						<div class='notes'>
+							<% if (toDos[i].notes !== null) { %>
+							<h6>Notes:</h6>
+							<p><%=toDos[i].notes%></p>
+							<% } %>
 						</div>
 					</div>
 				</div>
