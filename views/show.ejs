@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
+<%- include ('./partials/head.ejs') %>
 	<body>
 		<nav>
 			<a href="/to-do">Home</a>
 			<a href="/to-do/new">Add a new To Do</a>
 			<a href="/to-do/<%=toDo.id;%>/edit">Edit</a>
+			<form action="/to-do/<%=toDo._id%>?_method=DELETE" method="POST">
+          <input type="submit" value="Delete"/>
+          </form>
 		</nav>
 
 		<div class='show-page-container'>
@@ -29,5 +29,6 @@
 				<% }
 				} %>
 		</div>
+<%- include ('./partials/footer.ejs') %>
 	</body>
 </html>

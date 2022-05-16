@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
+<%- include ('./partials/head.ejs') %>
 	<body>
 		<nav>
 			<a href="/to-do">Home</a>
@@ -15,21 +12,29 @@
 					 	for (let i = 0; i < toDo.subToDo.length; i++) { %>
 							Sub-To-Do: <input type="text" name="subToDo" value="<%=toDo.subToDo[i]%>"/><br/>
 					<% }
-				}  const addSubToDo = () => {
-						console.log('HI')
-						%> <input type="text" name="subToDo" placeholder="Add Sub To Do Here"/><br/> <%
-					} %>
+					}  %>
 					Top Priority?:
-					<input type="checkbox" checked name="priority"/>
-					<%=toDo.priority%> <br/>
-					<script>
- 				 		document.getElementById('myButton').addEventListener("click, addSubToDo")
- 				 </script>
-				 <button id="myButton">Add New Sub To Do</button><br/>
-
-
+					<% if (toDo.priority === false) { %>
+						<input type="checkbox" name="priority"/><br/>
+					<% } else { %>
+						<input type="checkbox" checked name="priority"/><br/>
+					 <% } %>
 				<input type="submit" value="Submit Changes"/>
 				 </form>
-		</div>
+
+
+				 			<% const addSubToDo = () => {
+				 					 console.log('HI')
+				 					 %> <input type="text" name="subToDo" placeholder="Add Sub To Do Here"/><br/>
+				 				 <% } %>
+
+				 				<button href="javascript" onclick="addSubToDo()">Add New Sub To Do</button><br/>
+
+
+
+			</div>
+
+
 	</body>
+			<%- include ('./partials/footer.ejs') %>
 </html>

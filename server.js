@@ -1,9 +1,9 @@
 //___________________
 //Dependencies
 //___________________
-const express = require('express');
-const methodOverride  = require('method-override');
-const mongoose = require ('mongoose');
+const express = require('express')
+const methodOverride  = require('method-override')
+const mongoose = require ('mongoose')
 const ToDoSchema = require('./models/to-do-schema.js')
 const AffirmationSchema = require('./models/affirmations-schema.js')
 const seedDataToDos = require('./models/to-do-data.js')
@@ -63,6 +63,7 @@ app.get('/to-do/seed', (req,res) => {
 	)
 })
 
+
 // Adding Seed Data for affiramtions
 app.get('/to-do/seed2', (req,res) => {
 	AffirmationSchema.create(seedDataAffirmations, (err, createSeedDataAffirmations) => {
@@ -113,6 +114,18 @@ app.get('/to-do/:id/edit', (req, res) => {
 	})
 })
 
+// app.get('/to-do/completed/:id', (req, res) => {
+// 	ToDoSchema.findById(req.params.id, (err,foundToDo) => {
+// 		console.log(req.body);
+// 			res.render(
+// 				'show-completed.ejs',
+// 					{
+// 						completed: completedToDos
+// 					}
+// 				)
+// 		})
+// 	})
+//
 // Update
 app.put('/to-do/:id', (req, res) => {
 	if(req.body.priority === 'on'){
@@ -128,12 +141,13 @@ app.put('/to-do/:id', (req, res) => {
 })
 
 
-// // Delete
-// app.delete('/pokedex/:id', (req, res) => {
-// 	PokeSchema.findByIdAndRemove(req.params.id, (err, data) => {
-// 		res.redirect('/pokedex')
-// 	})
-// })
+// Delete
+app.delete('/to-do/:id', (req, res) => {
+	ToDoSchema.findByIdAndRemove(req.params.id, (err, data) => {
+		res.redirect('/to-do')
+	})
+})
+
 
 // show page
 app.get('/to-do/:id', (req, res) => {
@@ -161,8 +175,6 @@ app.post('/to-do', (req, res) => {
 			req.body.priority = false;
 	}
   ToDoSchema.create(req.body, (error, createdToDo) => {
-		console.log(req.body);
-		console.log(createdToDo);
       res.redirect('/to-do')
     })
 })

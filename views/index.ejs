@@ -1,34 +1,71 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
-	<body>
-		<nav>
-			<a href="/to-do/new">Add a new To Do</a>
-		</nav>
-			<a href="#">Tips</a>
+<%- include ('./partials/head.ejs') %>
 
-		<div class='home-container'>
-			<div class='to-do-container'>
-				<% for (let i = 0; i < toDos.length; i++) { %>
-					<div class='home-to-do-container'>
-						<a href="/to-do/<%=toDos[i].id; %>"><%=toDos[i].toDo%></a>
-						<a href="/to-do/<%=toDos[i].id;%>/edit">Edit</a>
-						<h4 class="priority">Top Priority?</h4>
-							<% if (toDos[i].priority === false) { %>
-								<input type="checkbox" name="topPriorityNo"/><br/>
-							<% }
-								if (toDos[i].priority === true) { %>
-								<input type="checkbox" name="topPriorityYes" checked/><br/>
-								<% }
-						 } %>
-				</div>
-			</div>
-			<div class='affirmation-container'>
-					<h1><%=affirmation[Math.floor(Math.random() * affirmation.length)].message%></h1>
+<body>
+	<div class='container-fluid'>
+		<div class='row'>
+			<div class='header col-12'>
+				<nav>
+					<a href="/to-do/new">Add a new To Do</a>
+					<a href="#">Tips</a>
+					<a href="#">About</a>
+				</nav>
 			</div>
 		</div>
-	</body>
+		<div class='row'>
+			<div class='header col-12'>
+				<h1 class="title">Accomplished.</h1>
+			</div>
+		</div>
+		<div class='row'>
+		<div class='content col-6'>
+			<div class="accordion" id="accordionSection">
+				<% for (let i = 0; i < toDos.length; i++) { %>
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="heading<%=[i]%>">
+						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%=[i]%>" aria-expanded="true" aria-controls="collapse<%=[i]%>">
+							<%=toDos[i].toDo%></a>
+				</div>
+				</button></h2>
+				<div id="collapse<%=[i]%>" class="accordion-collapse collapse" aria-labelledby="heading<%=[i]%>" data-bs-parent="#accordionSection">
+					<div class="accordion-body">
+						<a href="/to-do/<%=toDos[i].id;%>"><%=toDos[i].toDo%></a>
+						<a href="/to-do/completed/<%=toDos[i].id;%>">Accomplished</a>
+
+						<div class='priority-container'>
+							<h5 class='priority'>Top Priority?</h5>
+							<% if (toDos[i].priority === false) { %>
+							<h6>No</h6> <%
+					} else { %>
+							<h6>Yes</h6>
+							<% } %>
+						</div>
+						<div class='sub-to-do-container'>
+							<% if (toDos[i].subToDo !== null) {
+				 		for (let n = 0 ; n < toDos[i].subToDo.length; n++) { %>
+							<div class='show-sub-todo-container'>
+								<h5 class='show-sub-todo'><%=toDos[i].subToDo[n]%></h5>
+								<a href="/to-do/completed/<%=toDos[i].id;%>">Accomplished</a>
+							</div>
+							<% }
+					} %>
+						</div>
+					</div>
+				</div>
+				<% } %>
+			</div>
+		</div>
+
+
+		<div class='content col-5'>
+			<h1><%=affirmation[Math.floor(Math.random() * affirmation.length)].message%></h1>
+		</div>
+	</div>
+
+	<%- include ('./partials/footer.ejs') %>
+
+	</div>
+</body>
+
 </html>
