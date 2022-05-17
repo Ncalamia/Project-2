@@ -4,6 +4,11 @@
 
 
 <body tabindex="1">
+	<script>
+	 const accomplished = () => {
+		 console.log("hi");
+	 }
+	</script>
 	<div class='container-fluid'>
 		<div class='row'>
 			<div class='header'>
@@ -12,7 +17,7 @@
 
 					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myTipsModal">Tips</button>
 
-					<div class="modal" tabindex="-1" id="myTipsModal">
+					<div class="modal fade" tabindex="-1" id="myTipsModal">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -27,7 +32,7 @@
 					</div>
 					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myAboutModal">About</button>
 
-					<div class="modal" tabindex="-1" id="myAboutModal">
+					<div class="modal fade" tabindex="-1" id="myAboutModal">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -65,7 +70,12 @@
 				<div id="collapse<%=[i]%>" class="accordion-collapse collapse" aria-labelledby="heading<%=[i]%>" data-bs-parent="#accordionSection">
 					<div class="accordion-body">
 						<a href="/to-do/<%=toDos[i].id;%>"><%=toDos[i].toDo%></a>
-						<a href="/to-do/completed/<%=toDos[i].id;%>">Accomplished</a>
+
+						<a href="/to-do/<%=toDos[i].id;%>/accomplished" class="btn btn-primary"
+						href="javascript:"
+						onclick="accomplished()"
+						role="button"
+						>Accomplished</a>
 
 						<div class='priority-container'>
 							<h5 class='priority'>Top Priority?</h5>
@@ -80,7 +90,12 @@
 				 		for (let n = 0 ; n < toDos[i].subToDo.length; n++) { %>
 							<div class='show-sub-todo-container'>
 								<h5 class='show-sub-todo'><%=toDos[i].subToDo[n]%></h5>
-								<a href="/to-do/completed/<%=toDos[i].id;%>">Accomplished</a>
+
+								<a class="btn btn-primary"
+								href="javascript:"
+								onclick="accomplished()"
+								role="button"
+								>Accomplished</a>
 							</div>
 							<% }
 					} %>

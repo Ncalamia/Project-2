@@ -2,16 +2,15 @@
 <html lang="en" dir="ltr">
 <%- include ('./partials/head.ejs') %>
 	<body>
-		<nav>
-			<a href="/to-do">Home</a>
-		</nav>
 		<script>
+		let num = 0
 		 const addSubToDo = () => {
 					 // Referencing id subToDo properly place new input field
 					 const addButton = document.getElementById("addButton");
 					 // Creating new input field
 					 const inputNew = document.createElement("input");
 					 inputNew.id = "subToDoNew"
+					 console.log(inputNew.id);
 					 inputNew.type = "text"
 					 inputNew.name = "subToDo"
 					 inputNew.placeholder = "Write Sub To Do Here"
@@ -21,8 +20,9 @@
 					 const createBreak = document.createElement("br")
 					 inputNew.after(createBreak)
 					}
-		const deleteSubToDo = () => {
-					const subToDoCurrent = document.getElementById("subToDoCurrent");
+		const deleteSubToDo = (event) => {
+			const subToDoCurrent =
+					 document.getElementById("subToDoCurrent")
 					subToDoCurrent.remove()
 					}
 		const deleteNewSubToDo = () => {
@@ -30,9 +30,13 @@
 					subToDoNew.remove()
 					}
 		</script>
+		<nav>
+			<a href="/to-do">Home</a>
+		</nav>
 		<div class='edit-container'>
 			<form action="/to-do/<%=toDo._id%>?_method=PUT" method="POST">
 				To Do: <input type="text" name="toDo" value="<%=toDo.toDo%>"/><br/>
+				<% let id=0 %>
 				<% if (toDo.subToDo !== null) {
 					 	for (let i = 0; i < toDo.subToDo.length; i++) { %>
 							<div class="subToDoContainer">
@@ -44,6 +48,11 @@
 							>Delete Sub To Do</a>
 							</div>
 					<% } %>
+					 <script> var Id = <%id%>
+					 console.log(Id)
+
+					 </script>
+
 					<a id="addButton" class="btn btn-primary"
 					href="javascript:"
 					onclick="addSubToDo()"
@@ -65,6 +74,7 @@
 				<input type="submit" value="Submit Changes"/>
 				 </form>
 			</div>
-	</body>
+
 			<%- include ('./partials/footer.ejs') %>
+	</body>
 </html>

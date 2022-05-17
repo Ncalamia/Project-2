@@ -114,18 +114,19 @@ app.get('/to-do/:id/edit', (req, res) => {
 	})
 })
 
-// app.get('/to-do/completed/:id', (req, res) => {
-// 	ToDoSchema.findById(req.params.id, (err,foundToDo) => {
-// 		console.log(req.body);
-// 			res.render(
-// 				'show-completed.ejs',
-// 					{
-// 						completed: completedToDos
-// 					}
-// 				)
-// 		})
-// 	})
-//
+app.get('/to-do/:id/accomplished', (req, res) => {
+	ToDoSchema.findById(req.params.id, (err,accomplishedToDos) => {
+		console.log(req.body);
+			res.render(
+				'show-completed.ejs',
+					{
+						accomplished: accomplishedToDos
+					}
+				)
+		})
+	})
+
+
 // Update
 app.put('/to-do/:id', (req, res) => {
 	if(req.body.priority === 'on'){
@@ -147,7 +148,6 @@ app.delete('/to-do/:id', (req, res) => {
 		res.redirect('/to-do')
 	})
 })
-
 
 // show page
 app.get('/to-do/:id', (req, res) => {
@@ -180,6 +180,11 @@ app.post('/to-do', (req, res) => {
 })
 
 
+//Adding accomplishment to show-accomplished page
+app.post('/to-do/:id/accomplished', (req, res) => {
+	console.log(req.body)
+		res.render('re',accomplished);
+});
 
 
 //___________________
