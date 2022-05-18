@@ -128,8 +128,38 @@ app.get('/to-do/:id/accomplished', (req, res) => {
 		})
 	})
 
+// show page
+	app.get('/to-do/:id', (req, res) => {
+		if(req.body.priority === 'on'){
+				req.body.priority = true;
+		} else {
+				req.body.priority = false;
+		}
+	ToDoSchema.findById(req.params.id, (err, foundToDo) => {
+				res.render(
+					'show.ejs',
+					{
+						toDo: foundToDo
+					}
+				)
+			})
+	})
 
-// Update
+//Update to do on show page
+app.put('/to-do/:id', (req, res) => {
+	if (req.body.id = { checkbox: [ 'checkbox'] }) {
+		console.log("Hello");
+	}
+		ToDoSchema.findByIdAndUpdate(req.params.id, req.body, {
+			new: true}, (err, updatedToDo) => {
+				console.log(req.body.id);
+				console.log(req.body);
+				res.send('/to-do')
+			// res.redirect('/to-do/:id')
+		})
+	})
+
+// Update/Edit
 app.put('/to-do/:id', (req, res) => {
 	if(req.body.priority === 'on'){
 			req.body.priority = true;
@@ -150,23 +180,6 @@ app.delete('/to-do/:id', (req, res) => {
 	ToDoSchema.findByIdAndRemove(req.params.id, (err, data) => {
 		res.redirect('/to-do')
 	})
-})
-
-// show page
-app.get('/to-do/:id', (req, res) => {
-	if(req.body.priority === 'on'){
-			req.body.priority = true;
-	} else {
-			req.body.priority = false;
-	}
-ToDoSchema.findById(req.params.id, (err, foundToDo) => {
-			res.render(
-				'show.ejs',
-				{
-					toDo: foundToDo
-				}
-			)
-		})
 })
 
 

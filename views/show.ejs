@@ -2,17 +2,34 @@
 <html lang="en" dir="ltr">
 <%- include ('./partials/head.ejs') %>
 	<body>
+		<script>
+		const accomplishedToDo = () => {
+			console.log("accomplishedToDo");
+		}
+		const accomplishedSubToDo = (num1,num2) => {
+			const subToDoTitle = document.getElementById(`${num1}${num2}`)
+			const checkBox = document.getElementById(`${num1}${num2}`)
+			console.log(checkBox);
+			checkBox.checked = true
+		}
+		</script>
 		<nav>
 			<a href="/to-do">Home</a>
 			<a href="/to-do/new">Add a new To Do</a>
 			<a href="/to-do/<%=toDo.id;%>/edit">Edit</a>
 			<form action="/to-do/<%=toDo._id%>?_method=DELETE" method="POST">
           <input class="btn btn-primary" type="submit" value="Delete"/>
-          </form>
+      </form>
 		</nav>
 
 		<div class='show-page-container'>
+			<form action="/to-do/<%=toDo._id%>?_method=PUT" method="POST">
 			<h1><%=toDo.toDo%></h1>
+			<a class="btn btn-primary"
+			href="javascript:"
+			onclick="accomplishedToDo()"
+			role="button"
+			>Accomplished</a>
 			<div class='priority-container'>
 				<h4 class='priority'>Top Priority?</h4>
 				<% if (toDo.priority === false) { %>
@@ -25,6 +42,12 @@
 			 		for (let i = 0 ; i < toDo.subToDo.length; i++) { %>
 					<div class='show-sub-todo-container'>
 						<h4 class='show-sub-todo'><%=toDo.subToDo[i]%></h4>
+						<input type="checkbox" name="checkbox" value="checkbox" id=<%=[i]%><%=[i]%>>
+						<a class="btn btn-primary"
+						href="javascript:"
+						onclick="accomplishedSubToDo(<%=[i]%>,<%=[i]%>)"
+						role="button"
+						>Accomplished</a>
 					</div>
 				<% }
 				} %>
@@ -32,7 +55,9 @@
 				<h6>Notes:</h6>
 				<p><%=toDo.notes%></p>
 			</div>
-		</div>
+		<input class="btn btn-primary" type="submit" value="Submit Changes"/>
+	</form>
 <%- include ('./partials/footer.ejs') %>
+</div>
 	</body>
 </html>
