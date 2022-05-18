@@ -100,6 +100,18 @@ app.get('/to-do', (req, res) => {
 	})
 })
 
+// Show-accomplished page
+app.get('/to-do/accomplished', (req, res) => {
+	ToDoSchema.findById(req.params.id, (err,accomplishedToDos) => {
+		console.log(req.body);
+			res.render(
+				'show-accomplished.ejs',
+					{
+						accomplished: accomplishedToDos
+					}
+				)
+		})
+	})
 
 
 // Edit page
@@ -114,19 +126,6 @@ app.get('/to-do/:id/edit', (req, res) => {
 	})
 })
 
-
-// Show-accomplished page
-app.get('/to-do/:id/accomplished', (req, res) => {
-	ToDoSchema.findById(req.params.id, (err,accomplishedToDos) => {
-		console.log(req.body);
-			res.render(
-				'show-accomplished.ejs',
-					{
-						accomplished: accomplishedToDos
-					}
-				)
-		})
-	})
 
 // show page
 	app.get('/to-do/:id', (req, res) => {
@@ -145,19 +144,21 @@ app.get('/to-do/:id/accomplished', (req, res) => {
 			})
 	})
 
-//Update to do on show page
-app.put('/to-do/:id', (req, res) => {
-	if (req.body.id = { checkbox: [ 'checkbox'] }) {
-		console.log("Hello");
-	}
-		ToDoSchema.findByIdAndUpdate(req.params.id, req.body, {
-			new: true}, (err, updatedToDo) => {
-				console.log(req.body.id);
-				console.log(req.body);
-				res.send('/to-do')
-			// res.redirect('/to-do/:id')
-		})
-	})
+
+// //Update to do on show page
+// app.put('/to-do/:id', (req, res) => {
+// 	if (req.body.id = { checkbox: [ 'checkbox'] }) {
+// 		console.log("Hello");
+// 	}
+// 		ToDoSchema.findByIdAndUpdate(req.params.id, req.body, {
+// 			new: true}, (err, updatedToDo) => {
+// 				console.log(req.body.id);
+// 				console.log(req.body);
+// 				res.send('/to-do')
+// 			// res.redirect('/to-do/:id')
+// 		})
+// 	})
+
 
 // Update/Edit
 app.put('/to-do/:id', (req, res) => {
@@ -197,10 +198,14 @@ app.post('/to-do', (req, res) => {
 
 
 //Adding accomplishment to show-accomplished page
-app.post('/to-do/:id/accomplished', (req, res) => {
-	console.log(req.body)
-		res.render('re',accomplished);
-});
+app.put('/to-do', (req, res) => {
+	ToDoSchema.findByIdAndUpdate(req.params.id, req.body, {
+		new: true}, (err, accomplishedToDo) => {
+			console.log(req.params);
+			res.send('/to-do')
+			res.redirect('/to-do/accomplished')
+		})
+})
 
 
 //___________________
