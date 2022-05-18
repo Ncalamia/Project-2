@@ -5,7 +5,7 @@ const ToDoSchema = new mongoose.Schema({
 		subToDo:[String],
 		notes:String,
 		priority:Boolean,
-		finished:Boolean,
+		accomplished:Boolean,
 })
 
 const toDoCollection = mongoose.model("ToDo", ToDoSchema)

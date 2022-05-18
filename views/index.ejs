@@ -2,21 +2,49 @@
 <html lang="en" dir="ltr">
 <%- include ('./partials/head.ejs') %>
 
-
 <body tabindex="1">
 	<script>
-	 const accomplished = () => {
-		 console.log("hi");
-	 }
+	const accomplishedToDo = () => {
+		console.log("accomplishedToDo");
+	}
+	const accomplishedSubToDo = (num1,num2) => {
+		const subToDoTitle = document.getElementById(`${num1}${num2}`)
+		const checkBox = document.createElement("input")
+		checkBox.type = "checkbox"
+		checkBox.name = "name"
+		checkBox.id = "id"
+		checkBox.value = "value"
+		document.body.append(checkBox);
+		console.log(subToDoTitle);
+		checkBox.before(subToDoTitle)
+	}
 	</script>
 	<div class='container-fluid'>
 		<div class='row'>
 			<div class='header'>
-				<nav>
-					<button class="btn btn-primary" onclick="window.location.href='/to-do/new'">Add New Item To Accomplish</button>
+				<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+		<h1>Accomplished.</h1>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#"><button class="btn btn-primary" onclick="window.location.href='/to-do/new'">Add New Item To Accomplish</button></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myTipsModal">Tips For Accomplishing Your Goals</button></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myAboutModal">About</button></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myTipsModal">Tips</button>
-
+<!-- Modal -->
 					<div class="modal fade" tabindex="-1" id="myTipsModal">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -30,8 +58,8 @@
 							</div>
 						</div>
 					</div>
-					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myAboutModal">About</button>
-
+<!-- Modal -->
+<!-- Modal -->
 					<div class="modal fade" tabindex="-1" id="myAboutModal">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -45,55 +73,49 @@
 							</div>
 						</div>
 					</div>
-
-			</nav>
-		</div>
-	</div>
-
-
-
-	<div class='row'>
-		<div class='header col-12'>
-			<h1 class="title">Accomplished.</h1>
-		</div>
-	</div>
-	<div class='row'>
-		<div class='content col-6'>
+<!-- Modal -->
+<!-- Accordian -->
+<div class='row'>
+	<div class='content col-6'>
 			<div class="accordion" id="accordionSection">
 				<% for (let i = 0; i < toDos.length; i++) { %>
+
+					<br/>
 				<div class="accordion-item">
+					<!-- Progress Bar -->
+							<div id="progress" class="progress">
+					  	<div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+					<!-- Progress Bar -->
 					<h2 class="accordion-header" id="heading<%=[i]%>">
 						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%=[i]%>" aria-expanded="true" aria-controls="collapse<%=[i]%>">
 							<%=toDos[i].toDo%></a>
+							<div class='priority-container'>
+								<% if (toDos[i].priority === true) { %>
+								<h9>Top Priority</h9>
+									<%=toDos.priority%>
+								<% } %>
+							</div>
 				</div>
 				</button></h2>
 				<div id="collapse<%=[i]%>" class="accordion-collapse collapse" aria-labelledby="heading<%=[i]%>" data-bs-parent="#accordionSection">
 					<div class="accordion-body">
-						<a href="/to-do/<%=toDos[i].id;%>"><%=toDos[i].toDo%></a>
+						<a href="/to-do/<%=toDos[i].id;%>"><h3><%=toDos[i].toDo%></h3></a>
 
-						<a href="/to-do/<%=toDos[i].id;%>/accomplished" class="btn btn-primary"
+						<a class="btn btn-primary"
 						href="javascript:"
-						onclick="accomplished()"
+						onclick="accomplishedToDo()"
 						role="button"
 						>Accomplished</a>
 
-						<div class='priority-container'>
-							<h5 class='priority'>Top Priority?</h5>
-							<% if (toDos[i].priority === false) { %>
-							<h6>No</h6> <%
-					} else { %>
-							<h6>Yes</h6>
-							<% } %>
-						</div>
 						<div class='sub-to-do-container'>
 							<% if (toDos[i].subToDo !== null) {
 				 		for (let n = 0 ; n < toDos[i].subToDo.length; n++) { %>
 							<div class='show-sub-todo-container'>
-								<h5 class='show-sub-todo'><%=toDos[i].subToDo[n]%></h5>
-
+								<h5 class='show-sub-todo' id=<%=[i]%><%=[n]%>>	<%=toDos[i].subToDo[n]%></h5>
 								<a class="btn btn-primary"
 								href="javascript:"
-								onclick="accomplished()"
+								onclick="accomplishedSubToDo(<%=[i]%>,<%=[n]%>)"
 								role="button"
 								>Accomplished</a>
 							</div>
@@ -110,17 +132,19 @@
 				</div>
 				<% } %>
 			</div>
+<!-- Accordian -->
 		</div>
 
-
+<!-- Affirmation Div -->
 		<div class='content col-5'>
 			<h1><%=affirmation[Math.floor(Math.random() * affirmation.length)].message%></h1>
 		</div>
+<!-- Affirmation Div -->
+<!-- Footer -->
 	</div>
-
 	<%- include ('./partials/footer.ejs') %>
-
 	</div>
+<!-- Footer -->
 </body>
 
 </html>

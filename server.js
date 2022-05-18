@@ -114,11 +114,13 @@ app.get('/to-do/:id/edit', (req, res) => {
 	})
 })
 
+
+// Show-accomplished page
 app.get('/to-do/:id/accomplished', (req, res) => {
 	ToDoSchema.findById(req.params.id, (err,accomplishedToDos) => {
 		console.log(req.body);
 			res.render(
-				'show-completed.ejs',
+				'show-accomplished.ejs',
 					{
 						accomplished: accomplishedToDos
 					}
@@ -136,6 +138,7 @@ app.put('/to-do/:id', (req, res) => {
 	}
 	ToDoSchema.findByIdAndUpdate(req.params.id, req.body, {
 		new: true}, (err, updatedToDo) => {
+			console.log(req.params);
 			// res.send(updatedToDo)
 		res.redirect('/to-do')
 	})

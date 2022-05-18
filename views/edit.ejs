@@ -9,8 +9,8 @@
 					 const addButton = document.getElementById("addButton");
 					 // Creating new input field
 					 const inputNew = document.createElement("input");
-					 inputNew.id = "subToDoNew"
-					 console.log(inputNew.id);
+					 inputNew.id = "subToDo"
+					 console.log(inputNew);
 					 inputNew.type = "text"
 					 inputNew.name = "subToDo"
 					 inputNew.placeholder = "Write Sub To Do Here"
@@ -20,11 +20,13 @@
 					 const createBreak = document.createElement("br")
 					 inputNew.after(createBreak)
 					}
-		const deleteSubToDo = (event) => {
-			const subToDoCurrent =
-					 document.getElementById("subToDoCurrent")
-					subToDoCurrent.remove()
-					}
+
+				const changeNum = (num) => {
+					const divId =
+							 document.getElementById(num)
+							 console.log(divId);
+							divId.remove()
+				}
 		const deleteNewSubToDo = () => {
 					const subToDoNew = document.getElementById("subToDoNew");
 					subToDoNew.remove()
@@ -36,22 +38,17 @@
 		<div class='edit-container'>
 			<form action="/to-do/<%=toDo._id%>?_method=PUT" method="POST">
 				To Do: <input type="text" name="toDo" value="<%=toDo.toDo%>"/><br/>
-				<% let id=0 %>
 				<% if (toDo.subToDo !== null) {
 					 	for (let i = 0; i < toDo.subToDo.length; i++) { %>
-							<div class="subToDoContainer">
-							Sub-To-Do: <input id="subToDoCurrent" type="text" name="subToDo" value="<%=toDo.subToDo[i]%>"/>
-							<a class="btn btn-primary"
+							<div id=<%=[i]%>>
+							Sub-To-Do: <input type="text" name="subToDo" value="<%=toDo.subToDo[i]%>"/>
+							<a id="<%=[i]%>" class="btn btn-primary"
 							href="javascript:"
-							onclick="deleteSubToDo()"
+							onclick="changeNum(<%=[i]%>)"
 							role="button"
 							>Delete Sub To Do</a>
 							</div>
 					<% } %>
-					 <script> var Id = <%id%>
-					 console.log(Id)
-
-					 </script>
 
 					<a id="addButton" class="btn btn-primary"
 					href="javascript:"
@@ -65,13 +62,16 @@
 					role="button"
 					>Delete New Sub To Do</a>
 				<%	}  %>
+				</br>
+				</br>
 					Top Priority?:
 					<% if (toDo.priority === false) { %>
 						<input type="checkbox" name="priority"/><br/>
 					<% } else { %>
 						<input type="checkbox" checked name="priority"/><br/>
 					 <% } %>
-				<input type="submit" value="Submit Changes"/>
+					 </br>
+				<input class="btn btn-primary" type="submit" value="Submit Changes"/>
 				 </form>
 			</div>
 
