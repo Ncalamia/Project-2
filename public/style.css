@@ -1,8 +1,26 @@
 #body {
   background-color: #96A480;
+  font-family: 'Indie Flower', cursive;
+}
+.appTitle{
+  color:#556b2f;
 }
 #main-container{
 padding: 0;
+}
+#button-color {
+  background-color: #A76E5E;
+  color: white;
+}
+.btn {
+  background-color: #A76E5E;
+  color: white;
+}
+.modal-title{
+  font-size: 3em;
+}
+.modal-section{
+  font-size: 1.5em;
 }
 #home-container{
   margin:2em;
@@ -10,27 +28,76 @@ padding: 0;
 #accordion-item{
   background-color: #556b2f;
 }
+#accordion-button{
+  background-color: #e9aa91;
+  color: #013214;
+}
 #accordion-header{
   background-color: #A76E5E;
 }
+#labelLink {
+  color:black;
+  text-decoration: none;
+}
+#labelLink:hover {
+  color:white;
+}
+#notes{
+  color:black;
+  font-size: 1.5em;
+}
 #affirmation-container {
-  margin: 1em;
+  margin: 3em 1em 1em 1em;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
-  align-content: space-around;
 }
 #footer {
   margin-top: 20%;
   background-color:  #e9aa91;
 }
-
 .affirmation {
   text-align: center;
   height: 100%;
   width: 100%;
   padding: auto 0;
 }
+#fontNewPage {
+  font-size: 1.5em;
+}
+#formContainer{
+  display: flex;
+  justify-content: center;
+}
+.show-page-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+}
+.priority-container{
+  text-align: center;
+}
+#show-title {
+  font-size: 3em;
+}
+.notes {
+  font-size: 1.5em;
+}
+.actual-note{
+  font-size: 1em;
+}
+.notes-index{
+  font-size: 1em;
+}
+.edit{
+  margin-top: 10%;
+}
+.inputBox{
+  width: 350px;
+}
+
 
 /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) {

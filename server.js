@@ -240,7 +240,6 @@ app.put('/to-do/show/:id', (req, res) => {
 	}
 
 ToDoSchema.findById(req.params.id, (err,foundToDo) => {
-
 	for (let i = 0; i < foundToDo.subToDo.length; i++) {
 		let newDoneValue = eval(`done${i}`)
 		foundToDo.subToDo[i].done = newDoneValue
