@@ -329,9 +329,9 @@ app.delete('/to-do/:id', (req, res) => {
 
 //___________________
 //localhost:3000
-// app.get('/' , (req, res) => {
-//   res.send('Hello World!');
-// });
+app.get('/' , (req, res) => {
+  res.send('Hello World!');
+});
 
 //___________________
 //Listener
