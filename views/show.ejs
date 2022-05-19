@@ -6,24 +6,39 @@
 		const accomplishedToDo = () => {
 			console.log("accomplishedToDo");
 		}
-		const accomplishedSubToDo = (num1,num2) => {
+		const accomplishedSubToDo = (num1) => {
 			const subToDoTitle = document.getElementById(`${num1}${num2}`)
 			const checkBox = document.getElementById(`${num1}${num2}`)
 			console.log(checkBox);
 			checkBox.checked = true
 		}
 		</script>
-		<nav>
-			<a href="/to-do">Home</a>
-			<a href="/to-do/new">Add New Item To Accomplish</a>
-			<a href="/to-do/<%=toDo.id;%>/edit">Edit</a>
-			<form action="/to-do/<%=toDo._id%>?_method=DELETE" method="POST">
-          <input class="btn btn-primary" type="submit" value="Delete"/>
-      </form>
-		</nav>
-
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<div class="container-fluid">
+<h1>Accomplished.</h1>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+	<ul class="navbar-nav">
+		<li class="nav-item">
+			<a class="nav-link active" aria-current="page" href="#"><button class="btn btn-primary" onclick="window.location.href='/to-do'">Home</button></a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link active" aria-current="page" href="#"><button class="btn btn-primary" onclick="window.location.href='/to-do/new'">Add New Item To Accomplish</button></a>
+		</li>
+	</ul>
+</div>
+</div>
+</nav>
+			<br/>
 		<div class='show-page-container'>
-			<form action="/to-do/<%=toDo._id%>?_method=PUT" method="POST">
+			<form action="/to-do/<%=toDo._id%>?_method=DELETE" method="POST">
+					<input class="btn btn-primary" type="submit" value="Delete Accomplishment"/>
+			</form>
+			<a><button class="btn btn-primary" onclick="window.location.href='/to-do/<%=toDo.id;%>/edit'">Edit Accomplishment</button></a>
+			<br/>
+				<br/>
 			<h1><%=toDo.toDo%></h1>
 			<a class="btn btn-primary"
 			href="javascript:"
@@ -38,24 +53,24 @@
 					<h4>Yes</h4>
 			<% } %>
 			</div>
-
+			<form action="/to-do/show/<%=toDo._id;%>?_method=PUT" method="POST">
 			<% 	for (let i = 0 ; i < toDo.subToDo.length; i++) {
 				 	if (toDo.subToDo[i].subTODO !== undefined) {
 						if (toDo.subToDo[i].subTODO !== null) {
 							if (toDo.subToDo[i].subTODO !== "") {	%>
 					<div class='show-sub-todo-container'>
 						<h4 class='show-sub-todo'><%=toDo.subToDo[i].subTODO%></h4>
-						<input type="checkbox" name="checkbox" value="checkbox" id=<%=[i]%><%=[i]%>>
-						<a class="btn btn-primary"
-						href="javascript:"
-						onclick="accomplishedSubToDo(<%=[i]%>,<%=[i]%>)"
-						role="button"
-						>Accomplished</a>
+						<% if (toDo.subToDo[i].done === true) { %>
+							<input type="checkbox" name="done<%=i%>" checked/><br/>
+					<%	} else if (toDo.subToDo[i].done === false) { %>
+						<input type="checkbox" name="done<%=i%>"/><br/>
+						<% } %>
 					</div>
 					<% 	}
 						}
 					}
 				} %>
+
 			<div class='notes'>
 				<h6>Notes:</h6>
 				<p><%=toDo.notes%></p>

@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <%- include ('./partials/head.ejs') %>
 
-<body tabindex="1">
+<body id="body" tabindex="1">
 	<% accomplished = false %>
 	<script>
 	const accomplishedToDo = (num) => {
@@ -12,7 +12,7 @@
 		console.log(accomplishedItemDiv);
 	}
 	</script>
-	<div class='container-fluid'>
+	<div id="main-container" class='container-fluid'>
 		<div class='row'>
 			<div class='header'>
 				<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -69,18 +69,18 @@
 <!-- Modal -->
 <!-- Accordian -->
 <div class='row'>
-	<div class='content col-6'>
+	<div id="home-container" class='content col-6'>
 			<div class="accordion" id="accordionSection">
 				<% for (let i = 0; i < toDos.length; i++) { %>
 
 					<br/>
-				<div class="accordion-item" id="accordItem<%=i%>">
+				<div class="accordion-item" id="accordion-item" id="accordItem<%=i%>">
 					<!-- Progress Bar -->
-							<div id="progress" class="progress">
+							<!-- <div id="progress" class="progress">
 					  	<div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-							</div>
+							</div> -->
 					<!-- Progress Bar -->
-					<h2 class="accordion-header" id="heading<%=[i]%>">
+					<h2 class="accordion-header" id="accordion-header" id="heading<%=[i]%>">
 						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%=[i]%>" aria-expanded="true" aria-controls="collapse<%=[i]%>">
 							<%=toDos[i].toDo%></a>
 							<div class='priority-container'>
@@ -94,7 +94,7 @@
 				<div id="collapse<%=[i]%>" class="accordion-collapse collapse" aria-labelledby="heading<%=[i]%>" data-bs-parent="#accordionSection">
 					<div class="accordion-body">
 
-						<a href="/to-do/<%=toDos[i].id;%>"><h3><%=toDos[i].toDo%></h3></a>
+						<a href="/to-do/show/<%=toDos[i].id;%>"><h3><%=toDos[i].toDo%></h3></a>
 
 						<a class="btn btn-primary"
 						href="javascript:"
@@ -127,12 +127,14 @@
 <!-- Accordian -->
 		</div>
 <!-- Affirmation Div -->
-		<div class='content col-5'>
-			<h1><%=affirmation[Math.floor(Math.random() * affirmation.length)].message%></h1>
+		<div id="affirmation-container" class='content col-4'>
+			<div id="affirmation-div">
+			<h1 class="affirmation"><%=affirmation[Math.floor(Math.random() * affirmation.length)].message%></h1>
+		</div>
 		</div>
 <!-- Affirmation Div -->
 <!-- Footer -->
-	</div>
+</div>
 	<%- include ('./partials/footer.ejs') %>
 	</div>
 <!-- Footer -->

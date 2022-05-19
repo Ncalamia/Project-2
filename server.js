@@ -100,19 +100,30 @@ app.get('/to-do', (req, res) => {
 	})
 })
 
-// // Show-accomplished page
-// app.get('/to-do/accomplished', (req, res) => {
-// 	ToDoSchema.findById(req.params.id, (err,accomplishedToDos) => {
-// 		console.log(req.body);
-// 			res.render(
-// 				'show-accomplished.ejs',
-// 					{
-// 						accomplished: accomplishedToDos
-// 					}
-// 				)
-// 		})
-// 	})
+// Show-accomplished page
+app.get('/to-do/accomplished', (req, res) => {
+	ToDoSchema.findById(req.params.id, (err,accomplishedToDos) => {
+		console.log(req.body);
+			res.render(
+				'show-accomplished.ejs',
+					{
+						accomplished: accomplishedToDos
+					}
+				)
+		})
+	})
 
+// show page
+	app.get('/to-do/show/:id', (req, res) => {
+	ToDoSchema.findById(req.params.id, (err, foundToDo) => {
+				res.render(
+					'show.ejs',
+					{
+						toDo: foundToDo
+					}
+				)
+			})
+	})
 
 // Edit page
 app.get('/to-do/:id/edit', (req, res) => {
@@ -126,50 +137,6 @@ app.get('/to-do/:id/edit', (req, res) => {
 	})
 })
 
-//Edit subToDos page
-app.get('/to-do/:id/editSubToDo', (req, res) => {
-		ToDoSchema.findById(req.params.id, (err,foundToDo) => {
-			res.render(
-				'editSubToDo.ejs',
-			{
-				toDo:foundToDo
-			}
-		)
-	})
-})
-
-
-// show page
-	app.get('/to-do/:id', (req, res) => {
-		if(req.body.priority === 'on'){
-				req.body.priority = true;
-		} else {
-				req.body.priority = false;
-		}
-	ToDoSchema.findById(req.params.id, (err, foundToDo) => {
-				res.render(
-					'show.ejs',
-					{
-						toDo: foundToDo
-					}
-				)
-			})
-	})
-
-
-// //Update to do on show page
-// app.put('/to-do/:id', (req, res) => {
-// 	if (req.body.id = { checkbox: [ 'checkbox'] }) {
-// 		console.log("Hello");
-// 	}
-// 		ToDoSchema.findByIdAndUpdate(req.params.id, req.body, {
-// 			new: true}, (err, updatedToDo) => {
-// 				console.log(req.body.id);
-// 				console.log(req.body);
-// 				res.send('/to-do')
-// 			// res.redirect('/to-do/:id')
-// 		})
-// 	})
 
 // Adding new to do
 app.post('/to-do', (req, res) => {
@@ -186,10 +153,6 @@ app.post('/to-do', (req, res) => {
 	let subToDoToAdd4 = req.body.subToDo4
 	let subToDoToAdd5 = req.body.subToDo5
 	let subToDoToAdd6 = req.body.subToDo6
-	let subToDoToAdd7 = req.body.subToDo7
-	let subToDoToAdd8 = req.body.subToDo8
-	let subToDoToAdd9 = req.body.subToDo9
-	let subToDoToAdd10 = req.body.subToDo10
 
 req.body.subToDo = [{
 		subTODO:subToDoToAdd0,
@@ -218,32 +181,79 @@ req.body.subToDo = [{
 {
 	subTODO:subToDoToAdd6,
 	done:false
-},
-{
-	subTODO:subToDoToAdd7,
-	done:false
-},
-{
-	subTODO:subToDoToAdd8,
-	done:false
-},
-{
-	subTODO:subToDoToAdd9,
-	done:false
-},
-{
-	subTODO:subToDoToAdd10,
-	done:false
 }]
-
+console.log(req.body.notes);
   ToDoSchema.create(req.body, (error, createdToDo) => {
-		console.log(req.body.priority);
-		console.log(req.body);
-		console.log(req.body.subToDo);
+console.log(req.body.notes);
 		// res.send('/to-do/new')
 		res.redirect('/to-do')
 	})
 })
+
+
+//Update accomplishments
+app.put('/to-do/show/:id', (req, res) => {
+	console.log("working?");
+
+	let done0 = req.body.done0
+	let done1 = req.body.done1
+	let done2 = req.body.done2
+	let done3 = req.body.done3
+	let done4 = req.body.done4
+	let done5 = req.body.done5
+	let done6 = req.body.done6
+
+	if (done0 === 'on') {
+		done0 = true
+	} else {
+		done0 = false
+	}
+	if (done1 === 'on') {
+		done1 = true
+	} else {
+		done1 = false
+	}
+	if (done2 === 'on') {
+		done2 = true
+	} else {
+		done2 = false
+	}
+	if (done3 === 'on') {
+		done3 = true
+	} else {
+		done3 = false
+	}
+	if (done4 === 'on') {
+		done4 = true
+	} else {
+		done4 = false
+	}
+	if (done5 === 'on') {
+		done5 = true
+	} else {
+		done5 = false
+	}
+	if (done6 === 'on') {
+		done6 = true
+	} else {
+		done6 = false
+	}
+
+ToDoSchema.findById(req.params.id, (err,foundToDo) => {
+
+	for (let i = 0; i < foundToDo.subToDo.length; i++) {
+		let newDoneValue = eval(`done${i}`)
+		foundToDo.subToDo[i].done = newDoneValue
+		console.log(newDoneValue);
+	}
+	ToDoSchema.findByIdAndUpdate(req.params.id, foundToDo, {
+		new: true}, (err, updatedToDo) => {
+				// res.send(updatedToDo)
+			res.redirect('/to-do')
+		})
+	})
+})
+
 
 
 // Update/Edit
@@ -253,6 +263,42 @@ app.put('/to-do/:id', (req, res) => {
 	} else {
 			req.body.priority = false
 	}
+	let subToDoToAdd0 = req.body.subToDo0
+	let subToDoToAdd1 = req.body.subToDo1
+	let subToDoToAdd2 = req.body.subToDo2
+	let subToDoToAdd3 = req.body.subToDo3
+	let subToDoToAdd4 = req.body.subToDo4
+	let subToDoToAdd5 = req.body.subToDo5
+	let subToDoToAdd6 = req.body.subToDo6
+
+	req.body.subToDo = [{
+		subTODO:subToDoToAdd0,
+		done:false
+	},
+	{
+	subTODO:subToDoToAdd1,
+	done:false
+	},
+	{
+	subTODO:subToDoToAdd2,
+	done:false
+	},
+	{
+	subTODO:subToDoToAdd3,
+	done:false
+	},
+	{
+	subTODO:subToDoToAdd4,
+	done:false
+	},
+	{
+	subTODO:subToDoToAdd5,
+	done:false
+	},
+	{
+	subTODO:subToDoToAdd6,
+	done:false
+	}]
 ToDoSchema.findByIdAndUpdate(req.params.id, req.body, {
 	new: true}, (err, updatedToDo) => {
 			// res.send(updatedToDo)
@@ -269,20 +315,6 @@ app.delete('/to-do/:id', (req, res) => {
 	})
 })
 
-
-
-
-// // Adding new to do
-// app.post('/to-do/newToDo', (req, res) => {
-// 	if(req.body.priority === 'on'){
-// 			req.body.priority = true;
-// 	} else {
-// 			req.body.priority = false;
-// 	}
-//   ToDoSchema.create(req.body, (error, createdToDo) => {
-// 		res.send('/to-do/newsubToDo')
-//     })
-// })
 
 
 // //Adding accomplishment to show-accomplished page
