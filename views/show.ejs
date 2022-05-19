@@ -15,7 +15,7 @@
 		</script>
 		<nav>
 			<a href="/to-do">Home</a>
-			<a href="/to-do/new">Add a new To Do</a>
+			<a href="/to-do/new">Add New Item To Accomplish</a>
 			<a href="/to-do/<%=toDo.id;%>/edit">Edit</a>
 			<form action="/to-do/<%=toDo._id%>?_method=DELETE" method="POST">
           <input class="btn btn-primary" type="submit" value="Delete"/>
@@ -38,10 +38,13 @@
 					<h4>Yes</h4>
 			<% } %>
 			</div>
-			<% if (toDo.subToDo !== null) {
-			 		for (let i = 0 ; i < toDo.subToDo.length; i++) { %>
+
+			<% 	for (let i = 0 ; i < toDo.subToDo.length; i++) {
+				 	if (toDo.subToDo[i].subTODO !== undefined) {
+						if (toDo.subToDo[i].subTODO !== null) {
+							if (toDo.subToDo[i].subTODO !== "") {	%>
 					<div class='show-sub-todo-container'>
-						<h4 class='show-sub-todo'><%=toDo.subToDo[i]%></h4>
+						<h4 class='show-sub-todo'><%=toDo.subToDo[i].subTODO%></h4>
 						<input type="checkbox" name="checkbox" value="checkbox" id=<%=[i]%><%=[i]%>>
 						<a class="btn btn-primary"
 						href="javascript:"
@@ -49,7 +52,9 @@
 						role="button"
 						>Accomplished</a>
 					</div>
-				<% }
+					<% 	}
+						}
+					}
 				} %>
 			<div class='notes'>
 				<h6>Notes:</h6>

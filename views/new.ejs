@@ -9,15 +9,22 @@
 					 const inputNew = document.createElement("input");
 					 inputNew.id = "subToDo"
 					 inputNew.type = "text"
-					 inputNew.name = "subToDo"
+					 inputNew.name = `subToDo`
 					 inputNew.placeholder = "Write Sub To Do Here"
 					 document.body.append(inputNew);
 					 // Inserting new input field in correct spot
 					 breakingPoint.after(inputNew)
 					}
-		const deleteSubToDo = () => {
-		 			const subToDoDiv = document.getElementById("subToDoContainer");
-					subToDoDiv.removeChild(subToDoDiv.lastChild)
+		const deleteSubToDo = (num) => {
+			console.log("working");
+		 			const subToDo = document.getElementById(`subToDo${num}`)
+					subToDo.remove()
+					const buttonId = document.getElementById(`buttonId${num}`)
+					buttonId.remove()
+					const subTitleId = document.getElementById(`subTitle${num}`)
+					subTitleId.remove()
+					const breakId = document.getElementById("remove")
+					breakId.remove()
 		 			}
 		</script>
 		<nav>
@@ -25,30 +32,28 @@
 		</nav>
 		<div id="formContainer">
 		<form action="/to-do" method="POST">
-						To Do: <br/> <input type="text" name="toDo" placeholder="Write To Do Here"/><br/>
+						<br/>
+						Top priority? <input type="checkbox" name="priority" placeholder="write here"/><br/>
+						<br/>
+						<input type="hidden" name="accomplished" value=false>
+						<input type="hidden" name="valueOfAccomplishments" value=0>
+						<h4>Main Accomplishment:</h4> <br/> <input type="text" name="toDo" placeholder="Type Here"/>
+						<br/>
 						<br/>
 						<div id="subToDoContainer">
-            Sub To Do: <br/> <input id="subToDo" type="text" name="subToDo" placeholder="Write Sub To Do Here"/>
-						<br id="breakingPoint"/>
-					</div>
-							<div id="buttonDiv">
-							<br/>
-							<a id="addButton" class="btn btn-primary"
-				    	href="javascript:"
-				    	onclick="addSubToDo()"
-				    	role="button"
-				    	>Add New Sub To Do</a>
-							<br/>
-							<br/>
-							<a class="btn btn-primary"
+						<% for (let i = 0; i < 6; i++) { %>
+            <h5 id="subTitle<%=i%>">Mini Accomplishment:</h5>
+						<input id="subToDo<%=i%>" type="text" name="subToDo<%=i%>" placeholder="Type Here"/>
+							<a id="buttonId<%=i%>"class="btn btn-primary"
 							href="javascript:"
-							onclick="deleteSubToDo()"
+							onclick="deleteSubToDo(<%=i%>)"
 							role="button"
-							>Delete Sub To Do</a>
+							>Delete</a>
+					<div id="remove">
+					</br>
+					</div>
+					<% } %>
 						</div>
-						<br/>
-						<br/>
-						Priority: <input type="checkbox" name="priority" placeholder="write here"/><br/>
 						<br/>
 					<div class='submit-new-to-do'>
             <input class="btn btn-primary" type="submit" value="Create To Do"/>

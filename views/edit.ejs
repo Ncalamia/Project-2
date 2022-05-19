@@ -3,34 +3,6 @@
 <%- include ('./partials/head.ejs') %>
 	<body>
 		<script>
-		let num = 0
-		 const addSubToDo = () => {
-					 // Referencing id subToDo properly place new input field
-					 const addButton = document.getElementById("addButton");
-					 // Creating new input field
-					 const inputNew = document.createElement("input");
-					 inputNew.id = "subToDo"
-					 console.log(inputNew);
-					 inputNew.type = "text"
-					 inputNew.name = "subToDo"
-					 inputNew.placeholder = "Write Sub To Do Here"
-					 document.body.append(inputNew);
-					 // Inserting new input field in correct spot
-					 addButton.before(inputNew)
-					 const createBreak = document.createElement("br")
-					 inputNew.after(createBreak)
-					}
-
-				const changeNum = (num) => {
-					const divId =
-							 document.getElementById(num)
-							 console.log(divId);
-							divId.remove()
-				}
-		const deleteNewSubToDo = () => {
-					const subToDoNew = document.getElementById("subToDoNew");
-					subToDoNew.remove()
-					}
 		</script>
 		<nav>
 			<a href="/to-do">Home</a>
@@ -40,38 +12,26 @@
 				To Do: <input type="text" name="toDo" value="<%=toDo.toDo%>"/><br/>
 				<% if (toDo.subToDo !== null) {
 					 	for (let i = 0; i < toDo.subToDo.length; i++) { %>
-							<div id=<%=[i]%>>
-							Sub-To-Do: <input type="text" name="subToDo" value="<%=toDo.subToDo[i]%>"/>
-							<a id="<%=[i]%>" class="btn btn-primary"
-							href="javascript:"
-							onclick="changeNum(<%=[i]%>)"
-							role="button"
-							>Delete Sub To Do</a>
+							<br/>
+							<div id="miniAccomplishment">
+							<h5>Mini Accomplishment:</h5>
+							<h6><%=toDo.subToDo[i].subTODO%></h6>
+							<a class="btn btn-primary" href="/to-do/<%=toDo.subToDo[i]._id;%>/editSubToDo">Edit</a>
 							</div>
 					<% } %>
-
-					<a id="addButton" class="btn btn-primary"
-					href="javascript:"
-					onclick="addSubToDo()"
-					role="button"
-					>Add New Sub To Do</a>
-					<br/>
-					<a class="btn btn-primary"
-					href="javascript:"
-					onclick="deleteNewSubToDo()"
-					role="button"
-					>Delete New Sub To Do</a>
-				<%	}  %>
-				</br>
-				</br>
+				<% } %>
+			</br>
 					Top Priority?:
-					<% if (toDo.priority === false) { %>
-						<input type="checkbox" name="priority"/><br/>
-					<% } else { %>
-						<input type="checkbox" checked name="priority"/><br/>
-					 <% } %>
-					 </br>
-				<input class="btn btn-primary" type="submit" value="Submit Changes"/>
+					<input
+									type="checkbox"
+									name="priority"
+									<% if (toDo.priority === true) { %>
+											checked
+											<% } %>
+											/>
+
+											<br/>
+					 <input class="btn btn-primary" type="submit" value="Submit Changes"/>
 				 </form>
 			</div>
 

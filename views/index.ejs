@@ -73,8 +73,6 @@
 			<div class="accordion" id="accordionSection">
 				<% for (let i = 0; i < toDos.length; i++) { %>
 
-					<form action="/to-do/accomplished?_method=PUT" method="POST">
-
 					<br/>
 				<div class="accordion-item" id="accordItem<%=i%>">
 					<!-- Progress Bar -->
@@ -108,22 +106,20 @@
 							<% if (toDos[i].subToDo !== null) {
 				 		for (let n = 0 ; n < toDos[i].subToDo.length; n++) { %>
 							<div class='show-sub-todo-container'>
-								<h5 class='show-sub-todo'>	<%=toDos[i].subToDo[n]%></h5>
+								<% if (toDos[i].subToDo[n].subTODO != null) { %>
+								<h5 class='show-sub-todo'>	<%=toDos[i].subToDo[n].subTODO%></h5>
+								<% } %>
 							</div>
-							<% if (true == toDos[i].subToDo.length ) {
-								console.log("working??")
-							}
-							}
-					} %>
+							<% }
+						} %>
 						</div>
 						<div class='notes'>
+							<br/>
 							<% if (toDos[i].notes !== null) { %>
 							<h6>Notes:</h6>
 							<p><%=toDos[i].notes%></p>
 							<% } %>
 						</div>
-						<input class="btn btn-primary" type="submit" value="Submit Changes"/>
-					</form>
 					</div>
 				</div>
 				<% } %>
