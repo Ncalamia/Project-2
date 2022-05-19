@@ -315,18 +315,6 @@ app.delete('/to-do/:id', (req, res) => {
 })
 
 
-
-// //Adding accomplishment to show-accomplished page
-// app.put('/to-do', (req, res) => {
-// 	ToDoSchema.findByIdAndUpdate(req.params.id, req.body, {
-// 		new: true}, (err, accomplishedToDo) => {
-// 			console.log(req.params);
-// 			res.send('/to-do')
-// 			res.redirect('/to-do/accomplished')
-// 		})
-// })
-
-
 //___________________
 //localhost:3000
 app.get('/' , (req, res) => {
