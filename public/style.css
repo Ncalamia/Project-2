@@ -38,7 +38,6 @@ padding: 0;
 #labelLink {
   color:black;
   text-decoration: none;
-
 }
 #labelLink:hover {
   color:white;
@@ -112,6 +111,18 @@ padding: 0;
 .inputNotes {
   width: 30em;
 }
+.form {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  text-align: center;
+}
+.new-input {
+  width: 40%;
+  height: 2em;
+}
+
+
 
 @media only screen and (max-width: 500px) {
   .row {
@@ -138,6 +149,14 @@ padding: 0;
   #show-title {
     text-align: center;
   }
+  .new-input {
+    width: 60%;
+    height: 2em;
+  }
+  .form {
+    margin: 0;
+    width: 100%;
+  }
 }
 
 
@@ -151,5 +170,9 @@ padding: 0;
   }
   .inputNotes {
     width: 14em;
+  }
+  .new-input {
+    width: %;
+    height: 2em;
   }
 }

@@ -30,13 +30,13 @@
 </div>
 </nav>
 		<div id="formContainer">
-		<form action="/to-do" method="POST">
+		<form class="form" action="/to-do" method="POST">
 						<br/>
 						<input type="hidden" name="accomplished" value=false>
 						<input type="hidden" name="valueOfAccomplishments" value=0>
 						<div id='newPageAlignment'>
 						<h2>Main Accomplishment:</h2>
-						<input type="text" name="toDo" placeholder="Type Here"/>
+						<input class="new-input" type="text" name="toDo" placeholder="Type Here"/>
 						</div>
 						<br/>
 						<div id='newPageAlignment'>
@@ -47,7 +47,7 @@
 						<% for (let i = 0; i < 6; i++) { %>
 						<div id='newPageAlignment'>
             <h5 id="fontNewPage" id="subTitle<%=i%>">Mini Accomplishment:</h5>
-						<input id="subToDo<%=i%>" type="text" name="subToDo<%=i%>" placeholder="Type Here"/>
+						<input class="new-input" id="subToDo<%=i%>" type="text" name="subToDo<%=i%>" placeholder="Type Here"/>
 							<a id="button-color" id="buttonId<%=i%>" class="btn"
 							href="javascript:"
 							onclick="deleteSubToDo(<%=i%>)"
@@ -61,7 +61,7 @@
 						</div>
 						<div id="addNotes">
 							<h5 id="fontNewPage">Notes:</h5>
-							<input type="text" name="notes" placeholder="Type Here"/>
+							<input class="new-input" type="text" name="notes" placeholder="Type Here"/>
 						</div>
 						<br/>
 					<div class='submit-new-to-do'>
