@@ -100,7 +100,7 @@
 							<% } %>
 						</div>
 						<br/>
-						<a id="labelLink" href="/to-do/show/<%=toDos[i].id;%>"><h3><%=toDos[i].toDo%></h3></a>
+						<a id="labelLink" href="/to-do/show/<%=toDos[i].id;%>"><h3 class="label-link"><%=toDos[i].toDo%></h3></a>
 						<div class='sub-to-do-container'>
 							<% if (toDos[i].subToDo !== null) {
 				 		for (let n = 0 ; n < toDos[i].subToDo.length; n++) { %>
@@ -127,7 +127,7 @@
 		</div>
 <!-- Affirmation Div -->
 		<div id="affirmation-container" class='content col-4'>
-			<h4>Daily Affirmation:</h4>
+			<h4 class="daily-aff">Daily Affirmation:</h4>
 			<div id="affirmation-div">
 			<h1 class="affirmation"><%=affirmation[Math.floor(Math.random() * affirmation.length)].message%></h1>
 		</div>

@@ -2,8 +2,6 @@
 <html lang="en" dir="ltr">
 <%- include ('./partials/head.ejs') %>
 	<body id="body">
-		<script>
-		</script>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 <div class="container-fluid">
 <h1 class="appTitle">Accomplished.</h1>
@@ -13,17 +11,17 @@
 <div class="collapse navbar-collapse" id="navbarNav">
 	<ul class="navbar-nav">
 		<li class="nav-item">
-			<a class="nav-link active" aria-current="page" href="#"><button class="btn btn-primary" onclick="window.location.href='/to-do'">Home</button></a>
+			<a class="nav-link active" aria-current="page" href="#"><button id="button-color" class="btn" onclick="window.location.href='/to-do'">Home</button></a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link active" aria-current="page" href="#"><button class="btn btn-primary" onclick="window.location.href='/to-do/new'">Add New Item To Accomplish</button></a>
+			<a class="nav-link active" aria-current="page" href="#"><button id="button-color" class="btn" onclick="window.location.href='/to-do/new'">Add New Item To Accomplish</button></a>
 		</li>
 	</ul>
 </div>
 </div>
 </nav>
 		<div id="formContainer">
-			<form action="/to-do/<%=toDo._id%>?_method=PUT" method="POST">
+			<form class="edit-form-container" action="/to-do/<%=toDo._id%>?_method=PUT" method="POST">
 				<h2 class="edit">Main Accomplishment: </h2><input class="inputBox" type="text" name="toDo" value="<%=toDo.toDo%>"/><br/>
 					<% 	for (let i = 0 ; i < toDo.subToDo.length; i++) {
 							if (toDo.subToDo[i].subTODO !== undefined) {
@@ -52,7 +50,7 @@
 											<br/>
 									<div id="addNotes">
 										<h5>Notes:</h5>
-											<input class="inputBox" type="text" name="notes" value="<%=toDo.notes%>"/>
+											<textarea class="inputNotes" type="text" name="notes" value="<%=toDo.notes%>"><%=toDo.notes%></textarea>
 											</div>
 											<br/>
 					 <input id="button-color" class="btn" type="submit" value="Submit Changes"/>

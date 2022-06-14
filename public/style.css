@@ -38,9 +38,14 @@ padding: 0;
 #labelLink {
   color:black;
   text-decoration: none;
+
 }
 #labelLink:hover {
   color:white;
+}
+.label-link {
+  font-size: 3em;
+  margin-bottom: 0.5em;
 }
 #notes{
   color:black;
@@ -69,6 +74,13 @@ padding: 0;
 #formContainer{
   display: flex;
   justify-content: center;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+.edit-form-container {
+  width: 80%;
+  text-align: center;
 }
 .show-page-container{
   display: flex;
@@ -95,26 +107,49 @@ padding: 0;
   margin-top: 10%;
 }
 .inputBox{
-  width: 350px;
+  width: 20em;
+}
+.inputNotes {
+  width: 30em;
+}
+
+@media only screen and (max-width: 500px) {
+  .row {
+    justify-content: center;
+  }
+  #home-container {
+    width: 80%;
+  }
+  #affirmation-container {
+    width: 80%;
+  }
+  .daily-aff {
+    text-align: center;
+  }
+  .info-footer {
+    padding-left: 0.5em;
+  }
+  .inputBox{
+    width: 15em;
+  }
+  .inputNotes {
+    width: 16em;
+  }
+  #show-title {
+    text-align: center;
+  }
 }
 
 
-/* Extra small devices (portrait phones, less than 576px) */
-@media (max-width: 575.98px) {
-
- }
-
-/* Small devices (landscape phones, less than 768px) */
-@media (max-width: 767.98px) {
-
- }
-
-/* Medium devices (tablets, less than 992px) */
-@media (max-width: 991.98px) {
-
-}
-
-/* Large devices (desktops, less than 1200px) */
-@media (max-width: 1199.98px) {
-
+@media only screen and (max-width: 400px) {
+  .show-page-container {
+    margin-left: 2em;
+    margin-right: 2em;
+  }
+  .inputBox{
+    width: 12em;
+  }
+  .inputNotes {
+    width: 14em;
+  }
 }
